@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414225319) do
+ActiveRecord::Schema.define(version: 20140414230753) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -68,6 +68,13 @@ ActiveRecord::Schema.define(version: 20140414225319) do
   add_index "contacts", ["country_id"], name: "index_contacts_on_country_id"
   add_index "contacts", ["state_id"], name: "index_contacts_on_state_id"
 
+  create_table "contract_types", force: true do |t|
+    t.string   "name"
+    t.string   "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "countries", force: true do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -85,6 +92,55 @@ ActiveRecord::Schema.define(version: 20140414225319) do
   add_index "employments", ["company_id"], name: "index_employments_on_company_id"
   add_index "employments", ["contact_id"], name: "index_employments_on_contact_id"
 
+  create_table "jobs", force: true do |t|
+    t.string   "number"
+    t.string   "precon_number"
+    t.string   "building"
+    t.string   "address"
+    t.string   "city"
+    t.integer  "state_id"
+    t.string   "zip"
+    t.integer  "country_id"
+    t.integer  "project_phase_id"
+    t.integer  "project_type_id"
+    t.integer  "sachse_group_id"
+    t.integer  "sqft"
+    t.integer  "union_id"
+    t.text     "comments"
+    t.datetime "precon_date"
+    t.datetime "start_date"
+    t.datetime "turnover_date"
+    t.integer  "contract_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jobs", ["contract_type_id"], name: "index_jobs_on_contract_type_id"
+  add_index "jobs", ["country_id"], name: "index_jobs_on_country_id"
+  add_index "jobs", ["project_phase_id"], name: "index_jobs_on_project_phase_id"
+  add_index "jobs", ["project_type_id"], name: "index_jobs_on_project_type_id"
+  add_index "jobs", ["sachse_group_id"], name: "index_jobs_on_sachse_group_id"
+  add_index "jobs", ["state_id"], name: "index_jobs_on_state_id"
+  add_index "jobs", ["union_id"], name: "index_jobs_on_union_id"
+
+  create_table "project_phases", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sachse_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "specialties", force: true do |t|
     t.integer  "company_id"
     t.integer  "trade_id"
@@ -94,6 +150,16 @@ ActiveRecord::Schema.define(version: 20140414225319) do
 
   add_index "specialties", ["company_id"], name: "index_specialties_on_company_id"
   add_index "specialties", ["trade_id"], name: "index_specialties_on_trade_id"
+
+  create_table "staff_assignments", force: true do |t|
+    t.integer  "job_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "staff_assignments", ["job_id"], name: "index_staff_assignments_on_job_id"
+  add_index "staff_assignments", ["user_id"], name: "index_staff_assignments_on_user_id"
 
   create_table "states", force: true do |t|
     t.string   "name"
