@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+["Access Flooring", "Acoust/Floor", "Acoustical", "Ansul Protection", "Applicances", "Aquariums", "Electrician"].each do |trade|
+  Trade.find_or_create_by_name(trade)
+end
+
+
+
