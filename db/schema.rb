@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414233333) do
+ActiveRecord::Schema.define(version: 20140416162807) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20140414233333) do
     t.integer  "contract_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "jobs", ["contract_type_id"], name: "index_jobs_on_contract_type_id"
@@ -124,6 +125,12 @@ ActiveRecord::Schema.define(version: 20140414233333) do
   add_index "jobs", ["union_id"], name: "index_jobs_on_union_id"
 
   create_table "project_phases", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_roles", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -156,6 +163,7 @@ ActiveRecord::Schema.define(version: 20140414233333) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_role_id"
   end
 
   add_index "staff_assignments", ["job_id"], name: "index_staff_assignments_on_job_id"

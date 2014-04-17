@@ -1,0 +1,14 @@
+<h1>Jobs</h1>
+<% @jobs.each do |job| %>
+  <div class="media">
+    <div class="media-body">
+      <div class="media-heading">
+        <h4><%= link_to job.name, job %></h4>
+      </div>
+        <%= job.address %><br>
+        <%= job.city %>, <%= job.state.abbreviation %> <%= job.zip %><br>
+    </div>
+</div>
+<% end %>
+
+<%= link_to "New Job", new_job_path, class: "btn btn-success" %>

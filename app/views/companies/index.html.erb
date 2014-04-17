@@ -1,0 +1,14 @@
+<h1>Companies</h1>
+<% @companies.each do |company| %>
+  <div class="media">
+    <div class="media-body">
+      <div class="media-heading">
+        <h4><%= link_to company.name, company %></h4>
+      </div>
+        <%= company.address %><br>
+        <%= company.city %>, <%= company.state.abbreviation %> <%= company.zip %><br>
+    </div>
+</div>
+<% end %>
+
+<%= link_to "New Company", new_company_path, class: "btn btn-success" %>

@@ -1,0 +1,12 @@
+<address>
+  <strong><%= @company.name %></strong><br>
+  <%= @company.address %><br>
+  <%= @company.city %>, <%= @company.state.abbreviation %> <%= @company.zip %><br>
+</address>
+
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  New Contact
+</button>
+
+ <%= link_to "New Contact", new_company_contact_path(@company), class: "btn btn-primary" %>

@@ -7,6 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#">Home</a></li>
+    <li><%= link_to "Companies", companies_path %></li>
+    <li><a href="#">Contacts</a></li>
+    <li><%= link_to "Jobs", jobs_path %></li>
+  </ul>
 <% if flash[:notice] %>
   <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -23,8 +30,13 @@
     <%= flash[:alert] %>
   </div>
 <% end %>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Companies</a></li>
+  <li class="active">Company Name</li>
+</ol>
 
 <%= yield %>
-
+</div>
 </body>
 </html>
