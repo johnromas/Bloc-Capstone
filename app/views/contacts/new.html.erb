@@ -2,10 +2,8 @@
   <h1><%= "New Contact for #{@company.name}" %> </h1>
   <div class="col-sm-4"> 
     <%= render partial: "form", locals: { company: @company, contact: @contact } %>
-    
   </div>
 </div>
-
 
 <script>
   $(document).ready(function(){

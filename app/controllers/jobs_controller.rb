@@ -1,6 +1,11 @@
 class JobsController < ApplicationController
   def index
     @jobs = Job.all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @jobs }
+    end
   end
 
   def new
@@ -30,7 +35,7 @@ class JobsController < ApplicationController
   end
 
   def update
-    @job = Job.find(parmas[:id])
+    @job = Job.find(params[:id])
     if @job.update_attributes(job_params)
       redirect_to @job, notice: "Job was updated successfully."
     else
@@ -42,6 +47,6 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:name, :address, :city, :state, :zip, :country_id, :project_phase_id, :project_type_id, :sachse_group_id, :sqft, :start_date, :turnover_date)
+    params.require(:job).permit(:name, :address, :city, :state, :zip, :country_id, :project_phase_id, :project_type_id, :sachse_group_id, :contract_type_id, :sqft, :start_date, :turnover_date)
   end
 end
