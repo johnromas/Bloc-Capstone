@@ -10,7 +10,7 @@
     $("#magic-checkbox").click(function(){
       $("#contact_address").attr('value', $("#contact_address").data("auto")),
       $("#contact_city").attr('value', $("#contact_city").data("auto")),
-      $("#contact_state_id").attr('value', $("#contact_state_id").data("auto")),
+      $("#contact_state_id option").attr('selected', $("#contact_state_id").data("auto")),
       $("#contact_zip").attr('value', $("#contact_zip").data("auto"))
     })
   });

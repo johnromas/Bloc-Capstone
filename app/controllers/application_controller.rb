@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
 
   def show
   end
+
+  def after_sign_in_path_for(resource)
+    jobs_path
+  end
 end

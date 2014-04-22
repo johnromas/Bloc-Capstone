@@ -1,6 +1,64 @@
 <h1>New Company</h1>
 <div class="row">
-  <div class="col-sm-4">
-    <%= render partial: 'form', locals: { company: @company } %>
+  <article class="col-sm-12 col-md-12 col-lg-6">
+    <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+      <header>
+        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+        <h2>Basic Form Elements </h2>
+      </header>
+      <div>
+        <div class="jarviswidget-editbox">
+        </div>
+        <div class="widget-body no-padding smart-form">
+          <%= simple_form_for @company do |f| %>
+          <header>
+            New Company
+          </header>
+
+          <fieldset>
+            
+            <section>
+              <label class="input">
+                <%= f.input :name, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+
+            <section>
+              <label class="input">
+                <%= f.input :address, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+
+            <section>
+              <label class="input">
+                <%= f.input :city, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+
+            <section>
+              <label class="input">
+                <%= f.association :state, input_html: { class: 'input-sm'} %>
+              <i></i></label>
+            </section>
+
+            <section>
+              <label class="input">
+                <%= f.input :zip, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+
+            <section>
+              <label class="input">
+                <%= f.input :phone, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+                            
+            <% end %>
+
+
+
+
+        </div>
+      </div>
+    </div>
   </div>
-</div>

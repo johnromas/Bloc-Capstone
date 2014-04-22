@@ -22,15 +22,35 @@ class CompaniesController < ApplicationController
     @contact = Contact.new
   end
 
-  def create
+ def create
+    #binding.pry
     @company = Company.new(company_params)
-    if @company.save
-      redirect_to @company, notice: "Company was saved successfully."
-    else
-      flash[:error] = "Error creating company. Please try again."
-      render :new
+
+    respond_to do |format|
+      if @company.save
+        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        format.json { render json: @company, status: :created, location: @company }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @company.errors, status: :unprocessable_entity }
+      end
     end
   end
+
+  def update
+
+     @company = Company.find(params[:id])
+      #binding.pry
+      respond_to do |format|
+        if @company.update_attributes(company_params)
+          format.html { redirect_to @company, notice: 'company was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
+      end
+    end
 
   private
 

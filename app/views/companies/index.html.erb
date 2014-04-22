@@ -1,14 +1,97 @@
-<h1>Companies</h1>
-<% @companies.each do |company| %>
-  <div class="media">
-    <div class="media-body">
-      <div class="media-heading">
-        <h4><%= link_to company.name, company %></h4>
-      </div>
-        <%= company.address %><br>
-        <%= company.city %>, <%= company.state.abbreviation %> <%= company.zip %><br>
-    </div>
-</div>
-<% end %>
+<div id="grid" style: "height: 400px"></div>
+
 
 <%= link_to "New Company", new_company_path, class: "btn btn-success" %>
+<% content_for :javascript do %>
+<script>
+
+$(function() {
+
+    var Company = kendo.data.Model.define({
+        id: "id"
+    })
+
+    var crudServiceBaseUrl = "/companies",
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read:  {
+                        url: crudServiceBaseUrl,
+                        dataType: "json"
+                    },
+                    update: {
+                        url: function(company) {
+                            return crudServiceBaseUrl + "/" + company.id;
+                        },
+                        dataType: "json",
+                        contentType: "application/json",
+                        type: "PUT"
+                    },
+                    destroy: {
+                        url: function(company) {
+                            return crudServiceBaseUrl + "/" + company.id
+                        },
+                        dataType: "json",
+                        type: "DELETE"
+                    },
+                    create: {
+                        url: crudServiceBaseUrl,
+                        dataType: "json",
+                        contentType: "application/json",
+                        type: "POST"
+                    },
+                    parameterMap: function(company, type) {
+                        if (type === "create" || type === "update") {
+                            return JSON.stringify({ company: company });
+                        }
+                    }
+                },
+                pageSize: 10,
+                schema: {
+                    model: {
+                        id: "id"
+
+                    }
+                }
+            });
+
+    $("#grid").kendoGrid({
+        dataSource: dataSource,
+        columnMenu: true,
+        filterable: true,
+        sortable: true,
+        resizable: true,
+        navigatable: true,
+        toolbar: ["create", "save", "cancel"],
+
+        pageable: {
+            refresh: true,
+            pageSizes: true,
+            buttonCount: 5
+        },
+        columns: 
+                [
+                {
+                    field: "name",
+                    title: "Job Name",
+                    width: 200
+                },
+                {
+                    field: "address",
+                    title: "Address",
+                    width: 250
+                }, 
+                {
+                    field: "city",
+                    title: "city"
+                }, 
+                {
+                    field: "state_id",
+                    title: "State"
+                }
+                ],
+        editable: true
+    });
+});
+
+</script>
+<% end %>

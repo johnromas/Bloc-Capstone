@@ -1,13 +1,120 @@
-<h1>Jobs</h1>
-<% @jobs.each do |job| %>
-  <div class="media">
-    <div class="media-body">
-      <div class="media-heading">
-        <h4><%= link_to job.name, job %></h4>
-      </div>
-      <h4><%= job.number %></h4>
-    </div>
-</div>
-<% end %>
+<div id="grid" style: "height: 400px"></div>
 
-<%= link_to "New Job", new_job_path, class: "btn btn-success" %>
+<% content_for :javascript do %>
+<script>
+
+$(function() {
+
+    var Job = kendo.data.Model.define({
+        id: "id"
+    })
+
+    var crudServiceBaseUrl = "/jobs",
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read:  {
+                        url: crudServiceBaseUrl,
+                        dataType: "json"
+                    },
+                    update: {
+                        url: function(job) {
+                            return crudServiceBaseUrl + "/" + job.id;
+                        },
+                        dataType: "json",
+                        contentType: "application/json",
+                        type: "PUT"
+                    },
+                    destroy: {
+                        url: function(job) {
+                            return crudServiceBaseUrl + "/" + job.id
+                        },
+                        dataType: "json",
+                        type: "DELETE"
+                    },
+                    create: {
+                        url: crudServiceBaseUrl,
+                        dataType: "json",
+                        contentType: "application/json",
+                        type: "POST"
+                    },
+                    parameterMap: function(job, type) {
+                        if (type === "create" || type === "update") {
+                            return JSON.stringify({ job: job });
+                        }
+                    }
+                },
+                pageSize: 10,
+                schema: {
+                    model: {
+                        id: "id"
+
+                    }
+                }
+            });
+
+    $("#grid").kendoGrid({
+        dataSource: dataSource,
+        columnMenu: true,
+        filterable: true,
+        sortable: true,
+        resizable: true,
+        navigatable: true,
+        toolbar: ["create", "save", "cancel"],
+
+        pageable: {
+            refresh: true,
+            pageSizes: true,
+            buttonCount: 5
+        },
+        columns: 
+                [
+                {
+                    field: "name",
+                    title: "Job Name",
+                    width: 200
+                },
+                {
+                    field: "number",
+                    title: "Job #",
+                    width: 250
+                }, 
+                {
+                    field: "precon_number",
+                    title: "Precon #"
+                }, 
+                {
+                    field: "building",
+                    title: "Building Name",
+                    width: 200
+                },
+                 {
+                    field: "address",
+                    title: "Address",
+                    width: 200
+                },
+                 {
+                    field: "city",
+                    title: "City",
+                    width: 200
+                },
+                 {
+                    field: "zip",
+                    title: "Zip Code",
+                    width: 200
+                },
+                {
+                    field: "sqft",
+                    title: "Sq. Ft.",
+                    width: 200
+                },
+                {
+                    field: "contract_type_id",
+                    title: "Contract Type"
+                }
+                ],
+        editable: true
+    });
+});
+
+</script>
+<% end %>

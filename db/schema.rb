@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416162807) do
+ActiveRecord::Schema.define(version: 20140419181100) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 20140416162807) do
     t.integer  "union_id"
     t.text     "comments"
     t.datetime "precon_date"
-    t.datetime "start_date"
-    t.datetime "turnover_date"
+    t.date     "start_date"
+    t.date     "turnover_date"
     t.integer  "contract_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"

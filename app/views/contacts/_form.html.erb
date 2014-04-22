@@ -8,10 +8,21 @@
     <input type="checkbox" id="magic-checkbox"> Same as Company Address
   </label>
   <%= f.input :city, input_html: { class: 'form-control', :"data-auto" => company.city } %>
-  <%= f.association :state, input_html: { class: 'form-control', :"data-auto" => company.state } %>
+  <%= f.association :state, input_html: { class: 'form-control', :"data-auto" => company.state.name } %>
   <%= f.input :zip, input_html: { class: 'form-control', :"data-auto" => company.zip } %>
   <%= f.input :mobile_phone, input_html: { class: 'form-control' } %>
   <%= f.input :alt_phone, input_html: { class: 'form-control' } %>
   <%= f.input :notes, input_html: { class: 'form-control' } %>
   <%= f.submit "Save Contact" %>
 <% end %>
+
+<script>
+  $(document).ready(function(){
+    $("#magic-checkbox").click(function(){
+      $("#contact_address").attr('value', $("#contact_address").data("auto")),
+      $("#contact_city").attr('value', $("#contact_city").data("auto")),
+      $("#contact_state_id option").attr('selected', $("#contact_state_id").data("auto")),
+      $("#contact_zip").attr('value', $("#contact_zip").data("auto"))
+    })
+  });
+</script>

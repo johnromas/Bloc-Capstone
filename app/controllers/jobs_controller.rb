@@ -20,33 +20,51 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
 
-  def create
+def create
+    #binding.pry
     @job = Job.new(job_params)
 
-    if @job.save
-      redirect_to @job, notice: "Job was saved successfully."
-    else
-      flash[:error] = "Error creating job. Please try again."
-      render :new
+    respond_to do |format|
+      if @job.save
+        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.json { render json: @job, status: :created, location: @job }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @job.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  def destroy
-  end
+    def destroy
+      def destroy
+        @job = Job.find(params[:id])
+        @job.destroy
 
-  def update
-    @job = Job.find(params[:id])
-    if @job.update_attributes(job_params)
-      redirect_to @job, notice: "Job was updated successfully."
-    else
-      flash[:error] = "Error updating job. Please try again."
-      render :new
+        respond_to do |format|
+          format.html { redirect_to jobs_url }
+          format.json { head :no_content }
     end
   end
+    end
 
-  private
+    def update
 
-  def job_params
-    params.require(:job).permit(:name, :address, :city, :state, :zip, :country_id, :project_phase_id, :project_type_id, :sachse_group_id, :contract_type_id, :sqft, :start_date, :turnover_date)
-  end
+     @job = Job.find(params[:id])
+      #binding.pry
+      respond_to do |format|
+        if @job.update_attributes(job_params)
+          format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @job.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+    private
+
+    def job_params
+      params.require(:job).permit(:name, :address, :city, :state, :zip, :country_id, :project_phase_id, :project_type_id, :sachse_group_id, :contract_type_id, :sqft, :start_date, :turnover_date)
+    end
 end
