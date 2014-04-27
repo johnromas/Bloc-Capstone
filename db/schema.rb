@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419181100) do
+ActiveRecord::Schema.define(version: 20140425232908) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140419181100) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "country_id"
   end
 
   add_index "companies", ["company_type_id"], name: "index_companies_on_company_type_id"
@@ -101,7 +102,7 @@ ActiveRecord::Schema.define(version: 20140419181100) do
     t.integer  "state_id"
     t.string   "zip"
     t.integer  "country_id"
-    t.integer  "project_phase_id"
+    t.integer  "project_phase_id", default: 1
     t.integer  "project_type_id"
     t.integer  "sachse_group_id"
     t.integer  "sqft"

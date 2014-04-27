@@ -7,6 +7,8 @@ class Job < ActiveRecord::Base
   belongs_to :union
   belongs_to :contract_type
 
+  accepts_nested_attributes_for :state
+
   has_many :staff_assignments
   has_many :project_roles, through: :staff_assignments
 
@@ -15,6 +17,7 @@ class Job < ActiveRecord::Base
   before_save :assign_job_number, on: [ :create, :update ]
   before_save :change_job_number, on: [ :update ]
   before_save :assign_precon_number, on: :create
+
 
   protected
 
@@ -32,6 +35,7 @@ class Job < ActiveRecord::Base
       t = 35
       c = a.to_s.rjust(3, '0')
       self.precon_number = "#{y}-#{t}-#{c}"
+      
     end
   end
 

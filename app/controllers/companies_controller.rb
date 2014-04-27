@@ -1,10 +1,11 @@
 class CompaniesController < ApplicationController
+  respond_to :html, :js
   def index
     @companies = Company.all
 
     respond_to do |format|
       format.html
-      format.json { render json: @companies }
+      format.json { render json: @companies, root: false }
     end
   end
 
@@ -52,9 +53,18 @@ class CompaniesController < ApplicationController
       end
     end
 
+    def destroy
+        @company = Company.find(params[:id])
+        @company.destroy
+
+        respond_to do |format|
+          format.html { redirect_to companies_url }
+          format.json { head :no_content }
+        end
+      end
   private
 
   def company_params
-      params.require(:company).permit!#(:name, :address, :city, :zip, :state_id)
-  end
+      params.require(:company).permit(:name, :address, :city, :state_id, :country_id, :zip, :phone, :website, :company_type_id)
+    end
 end

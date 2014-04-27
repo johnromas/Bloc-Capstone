@@ -4,7 +4,7 @@
     <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
       <header>
         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-        <h2>Basic Form Elements </h2>
+        <h2>Main Comapny Info</h2>
       </header>
       <div>
         <div class="jarviswidget-editbox">
@@ -43,6 +43,12 @@
 
             <section>
               <label class="input">
+                <%= f.association :country, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+
+            <section>
+              <label class="input">
                 <%= f.input :zip, input_html: { class: 'input-xs'} %>
               </label>
             </section>
@@ -52,6 +58,24 @@
                 <%= f.input :phone, input_html: { class: 'input-xs'} %>
               </label>
             </section>
+
+            <section>
+              <label class="input">
+                <%= f.input :website, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+
+            <section>
+              <label class="input">
+                <%= f.association :company_type, input_html: { class: 'input-xs'} %>
+              </label>
+            </section>
+
+            <footer>
+              <label class="submit">
+                <%= f.submit "Save", class: 'btn btn-primary' %>
+              </label>
+            </footer>
                             
             <% end %>
 

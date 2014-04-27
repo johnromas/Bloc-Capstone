@@ -1,4 +1,5 @@
-<div id="grid" style: "height: 400px"></div>
+ <div id="grid"></div>
+<%= link_to "New Job", new_job_path, class: 'btn btn-primary' %>
 
 <% content_for :javascript do %>
 <script>
@@ -45,11 +46,23 @@ $(function() {
                 },
                 pageSize: 10,
                 schema: {
-                    model: {
-                        id: "id"
-
-                    }
-                }
+                           model: {
+                             id: "id",
+                             fields: {
+                                id: { editable: false },
+                                //name: { type: "string" },
+                                number: { editable: false },
+                                precon_number: { editable: false },
+                                sqft: { type: "number" },
+                                state: { defaultValue: { id: 1, name: "Michigan"} },
+                                sachse_group: { defaultValue: { id: 1, name: "Commercial"} },
+                                project_type: { defaultValue: { id: 1, name: "Retail"} },
+                                contract_type: { defaultValue: { id: 1, name: "Cost Plus" } },
+                                project_phase: { defaultValue: { id: 1, name: "01. Sales"} }
+                                
+                             }
+                           }
+                       }
             });
 
     $("#grid").kendoGrid({
@@ -69,52 +82,95 @@ $(function() {
         columns: 
                 [
                 {
-                    field: "name",
-                    title: "Job Name",
-                    width: 200
+                    field: "project_phase",
+                    title: "Project Phase",
+                    editor: projPhaseDropDownEditor,
+                    template: "#=project_phase.name#",
+                    width: 150
                 },
+                {
+                    field: "precon_number",
+                    title: "Precon #",
+                    width: 110
+                }, 
                 {
                     field: "number",
                     title: "Job #",
-                    width: 250
+                    width: 100
                 }, 
                 {
-                    field: "precon_number",
-                    title: "Precon #"
-                }, 
+                    field: "name_as_link",
+                    title: "Project Name",
+                    editor: jobNameAutoFill,
+                    width: 300
+                },
                 {
                     field: "building",
-                    title: "Building Name",
-                    width: 200
+                    title: "Proj Bldg/Location",
+                    editor: buildingNameAutoFill,
+                    width: 250
                 },
-                 {
+                {
+                    field: "sachse_group",
+                    title: "Sachse Group",
+                    editor: sachseGroupDropDownEditor,
+                    template: "#=sachse_group.name#",
+                    width: 250
+                },
+                {
                     field: "address",
                     title: "Address",
                     width: 200
                 },
-                 {
+                {
                     field: "city",
                     title: "City",
-                    width: 200
+                    width: 150
                 },
-                 {
-                    field: "zip",
-                    title: "Zip Code",
-                    width: 200
+                {   field: "state", 
+                    title: "State", 
+                    width: 160, 
+                    editor: stateDropDownEditor, 
+                    template: "#=state.name#" 
+                },
+                {   field: "sqft", 
+                    title: "Sq. Ft.", 
+                    width: 160
+                },
+                {   field: "project_type", 
+                    title: "Project Type", 
+                    width: 160, 
+                    editor: projTypeDropDownEditor, 
+                    template: "#=project_type.name#" 
+                },
+                {   field: "contract_type", 
+                    title: "Contract Type", 
+                    width: 160, 
+                    editor: contractTypeDropDownEditor, 
+                    template: "#=contract_type.name#" 
                 },
                 {
-                    field: "sqft",
-                    title: "Sq. Ft.",
-                    width: 200
+                    field: "start_date",
+                    title: "Start Date",
+                    editor: datePickerEditor,
+                    width: 150
                 },
                 {
-                    field: "contract_type_id",
-                    title: "Contract Type"
-                }
+                    field: "turnover_date",
+                    title: "Turnover Date",
+                    editor: datePickerEditor,
+                    width: 150
+                },
+                {   command: "destroy", 
+                    title: "&nbsp;", 
+                    width: 120 }
                 ],
         editable: true
     });
 });
+
+
+
 
 </script>
 <% end %>
