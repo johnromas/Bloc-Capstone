@@ -65,16 +65,6 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    state = params[:job].delete(:state)
-    projType = params[:job].delete(:project_type)
-    projPhase = params[:job].delete(:project_phase)
-    sachseGroup = params[:job].delete(:sachse_group)
-    contractType = params[:job].delete(:contract_type)
-    params[:job].merge!({state_id: state["id"]})
-    params[:job].merge!({project_type_id: projType["id"]})
-    params[:job].merge!({project_phase_id: projPhase["id"]})
-    params[:job].merge!({sachse_group_id: sachseGroup["id"]})
-    params[:job].merge!({contract_type_id: contractType["id"]})
     params.require(:job).permit(:state_id, :name, :number, :precon_number, :address, :city, :zip, :country_id, :project_phase_id, :project_type_id, :sachse_group_id, :contract_type_id, :sqft, :start_date, :turnover_date, :building)
   end
 end
