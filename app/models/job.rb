@@ -12,14 +12,22 @@ class Job < ActiveRecord::Base
   has_many :staff_assignments
   has_many :project_roles, through: :staff_assignments
 
+  has_many :job_assignments
+  has_many :companies, through: :job_assignments
+  has_many :contacts, through: :job_assignments
+
   validates :name, presence: true
 
   before_save :assign_job_number, on: [ :create, :update ]
   before_save :change_job_number, on: [ :update ]
   before_save :assign_precon_number, on: :create
 
-
+  def assign_job_company(company)
+    @job.companies << company
+  end
   protected
+
+
 
   def assign_precon_number
     if !self.precon_number?

@@ -8,4 +8,7 @@ class Company < ActiveRecord::Base
   has_many :trades, through: :specialties
   has_many :employments
   has_many :contacts, through: :employments
+
+  has_many :job_assignments
+  has_many :jobs, through: :job_assignments
 end

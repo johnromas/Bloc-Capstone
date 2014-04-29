@@ -1,6 +1,17 @@
-<h1>Edit Job</h1>
-<div class="row">
-  <div class="col-sm-4">
-    <%= render partial: 'form', locals: { job: @job } %>
-  </div>
-</div>
+          <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-6">
+              <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                <header>
+                  <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                  <h2>Edit Job </h2>
+                </header>
+                <div>
+                  <div class="jarviswidget-editbox">
+                  </div>
+                  <div class="widget-body no-padding">
+                    <%= render partial: 'form', locals: { job: @job } %>
+                  </div>
+               </div>
+              </div>
+            </article>
+          </div>

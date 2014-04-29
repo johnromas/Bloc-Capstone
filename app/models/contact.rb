@@ -5,4 +5,7 @@ class Contact < ActiveRecord::Base
 
   has_many :employments
   has_many :companies, through: :employments
+
+  has_many :job_assignments
+  has_many :jobs, through: :job_assignments
 end

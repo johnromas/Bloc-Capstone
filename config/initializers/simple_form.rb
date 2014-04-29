@@ -45,6 +45,15 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: :span, class: :error }
   end
 
+  config.wrappers :smart_form do |b|
+    b.wrapper tag: 'section' do |component|
+      component.use :label, wrap_with: { tag: :label, class: 'label'}
+      component.use :input, wrap_with: { tag: :label, class: 'input' }
+  end
+end
+
+
+
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :default
 

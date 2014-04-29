@@ -1,18 +1,45 @@
-<%= simple_form_for job do |f| %>
-      <%= f.input :name, input_html: { class: 'form-control input-sm'}  %>
-      <%= f.input :building, input_html: { class: 'form-control input-sm'}  %>
-      <%= f.input :address, input_html: { class: 'form-control input-sm'} %>
-      <%= f.input :city, input_html: { class: 'form-control input-sm'} %>
-      <%= f.association :state, input_html: { class: 'form-control input-sm'} %>
-      <%= f.input :zip, input_html: { class: 'form-control input-sm'} %>
-      <%= f.association :country, input_html: { class: 'form-control input-sm'} %>
-      <%= f.association :project_phase, input_html: { class: 'form-control input-sm'} %>
-      <%= f.association :project_type, input_html: { class: 'form-control input-sm'} %>
-      <%= f.association :sachse_group, input_html: { class: 'form-control input-sm'} %>
-      <%= f.association :contract_type, input_html: { class: 'form-control input-sm'} %>
-      <%= f.input :sqft, input_html: { class: 'form-control input-sm'} %>
-      <%= f.input :turnover_date, input_html: { id: 'datepicker'} %>
-      <%= f.submit "Save", input_html: { class: 'btn btn-success'} { rows="10"} %>
-<% end %>
+<%= form_for @job, html: {class: "smart-form"} do |f| %>
+    <header>
+      Standard Form Header
+    </header>
 
+    <fieldset>
+      
+      <section>
+        <%= f.label :name, class: 'label' %>
+        <label class="input">
+          <%= f.text_field :name, class: 'input-xs' %>
+        </label>
+      </section>
 
+       <section>
+        <%= f.label :address, class: 'label' %>
+        <label class="input">
+          <%= f.text_field :address, class: 'input-xs' %>
+        </label>
+      </section>
+
+      <section>
+        <%= f.label :city, class: 'label' %>
+        <label class="input">
+          <%= f.text_field :city, class: 'input-xs' %>
+        </label>
+      </section>
+                      
+    <section>
+        <%= f.label :zip, class: 'label' %>
+        <label class="input">
+          <%= f.text_field :zip, class: 'input-xs' %>
+        </label>
+      </section>
+
+    
+    </fieldset>
+    
+    <footer>
+    <%= f.submit "Save", class: 'btn btn-primary' %>
+      <button type="button" class="btn btn-default" onclick="window.history.back();">
+        Back
+      </button>
+    </footer>
+  <% end %>

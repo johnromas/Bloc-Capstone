@@ -13,4 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require kendo/kendo.web.min.js
+//= require kendo/grids.js
+//= require_self
+
