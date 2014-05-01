@@ -1,8 +1,6 @@
 class StaffAssignmentsController < ApplicationController
  def create
-    binding.pry
-    # @job = JobAssignment.find(params[:job_id])
-    # @company = JobAssignment.find(params[:company_id])
+    #binding.pry
     @staff_assignment = StaffAssignment.new(params[:staff_assignment].permit!)
 
     if @staff_assignment.save
