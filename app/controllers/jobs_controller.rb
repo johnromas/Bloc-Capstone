@@ -15,6 +15,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @companies = @job.companies
+    @staff_assignments = @job.staff_assignments
   end
 
   def edit

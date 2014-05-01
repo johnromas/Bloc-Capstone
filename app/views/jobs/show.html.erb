@@ -56,6 +56,9 @@
                       <li>
                         <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Job Contacts</a>
                       </li>
+                      <li>
+                        <a href="#s3" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Job Staff</a>
+                      </li>
                     </ul>
         
                     <div id="myTabContent1" class="tab-content padding-10">
@@ -63,7 +66,7 @@
                         
                       </div>
                       <div class="tab-pane fade" id="s2">
-                        <table class='table table-bordered table-striped'>
+                        <table id='job-contacts' class='table table-bordered table-striped'>
                           <thead>
                           <tr>
                             <th>Type</th>
@@ -75,15 +78,44 @@
                         <tbody>
                           <% @companies.each do |company| %> 
                           <tr>
-                            <td><%= company.company_type.name %></td>
-                            <td><%= link_to company.name, company %></td>
+                            <td><%= company.company_type.name rescue "this is bad form" %></td>
+                            <td><%= link_to company.name, company rescue "this is bad form" %></td>
                             <td><%= company.address %></td>
                             <td>Test</td>
                           </tr>
                           <% end %>
                         </tbody>
                         </table>
-                          <button class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Add Contact</button>
+                        <%= form_for JobAssignment.new do |f| %>
+                          <%= f.collection_select :company_id, Company.all, :id, :name %>
+                          <%= f.hidden_field :job_id, value: @job.id %>
+                          <%= f.submit %>
+                        <% end %>
+                      </div>
+                      <div class="tab-pane fade" id="s3">
+                        <table id='staff-contacts' class='table table-bordered table-striped'>
+                          <thead>
+                          <tr>
+                            <th>Project Role</th>
+                            <th>Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @staff_assignments.each do |assignment| %> 
+                          <tr>
+                            <td><%= assignment.project_role.name %></td>
+                            <td><%= assignment.user.name rescue "bad"%></td>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                        </table>
+                         <%= form_for StaffAssignment.new do |f| %>
+                            <%= f.collection_select :project_role_id, ProjectRole.all, :id, :name %>
+                            <%= f.collection_select :user_id, User.all, :id, :name %>
+                            <%= f.hidden_field :job_id, value: @job.id %>
+                            <%= f.submit %>
+                          <% end %>
+                  
                     
                       </div>
                     </div>
@@ -148,12 +180,16 @@
                       <button type="button" class="btn btn-default" data-dismiss="modal">
                         Cancel
                       </button>
-                      <%= button_to "Add Contact", action: 'assign_job_company', class: "btn btn-primary" %>
-              
+                      <button id="add-contact-button" type="button" class="btn btn-primary">
+                        Add Contact
+                      </button>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
         
+        
+
 
 <%= link_to "Edit Job", edit_job_path, class: "btn btn-primary" %>
+

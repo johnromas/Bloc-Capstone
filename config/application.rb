@@ -27,6 +27,7 @@ module GAL
 
 
   config.serve_static_assets = true
+  #config.assets.paths << "#{Rails.root}/app/assets/javascripts/smartadmin"
 
   end
 end

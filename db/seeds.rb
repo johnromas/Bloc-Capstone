@@ -39,3 +39,4 @@ end
 ["01. Sales", "02. Budget", "03. Bidding", "04. Pending", "05. Upcoming", "06. Construction", "07. Closing - OPS"].each do |phase|
   ProjectPhase.find_or_create_by_name(phase)
 end
+

@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require kendo/kendo.web.min.js
 //= require kendo/grids.js
+//= require jobs.js.coffee
 //= require_self
 

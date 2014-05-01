@@ -1,5 +1,5 @@
  <div id="grid"></div>
-<%= link_to "New Job", new_job_path, class: 'btn btn-primary' %>
+
 
 <% content_for :javascript do %>
 <script>
@@ -99,7 +99,7 @@ $(function() {
                     width: 100
                 }, 
                 {
-                    field: "name_as_link",
+                    field: "name",
                     title: "Project Name",
                     editor: jobNameAutoFill,
                     width: 300

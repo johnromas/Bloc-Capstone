@@ -22,9 +22,7 @@ class Job < ActiveRecord::Base
   before_save :change_job_number, on: [ :update ]
   before_save :assign_precon_number, on: :create
 
-  def assign_job_company(company)
-    @job.companies << company
-  end
+
   protected
 
 
