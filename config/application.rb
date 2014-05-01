@@ -26,7 +26,7 @@ module GAL
     # config.i18n.default_locale = :de
 
 
-  config.serve_static_assets = true
+  config.serve_static_assets = false
   #config.assets.paths << "#{Rails.root}/app/assets/javascripts/smartadmin"
 
   end
