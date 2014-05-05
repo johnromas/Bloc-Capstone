@@ -1,7 +1,6 @@
 GAL::Application.routes.draw do
   
-
-
+  get "checkbooks/create"
   get "job_assignments/create"
   get "job_contacts/create"
   get "contract_types/index"
@@ -11,6 +10,7 @@ GAL::Application.routes.draw do
   resources :psr
   resources :contract_types
   resources :job_assignments
+  resources :checkbooks
   resources :staff_assignments
   resources :states
   resources :project_types

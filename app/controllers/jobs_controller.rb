@@ -16,6 +16,8 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @companies = @job.companies
     @staff_assignments = @job.staff_assignments
+    @checkbook = Checkbook.new
+    @checkbooks = @job.checkbooks
   end
 
   def edit

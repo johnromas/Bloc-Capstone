@@ -1,0 +1,5 @@
+$("#myModal").modal('toggle')
+
+var rowTemplate = "<tr><td><%= @checkbook.name %></td><td><%= @checkbook.description %></td><td><%= @checkbook.budget %></td><td><%= @checkbook.cost_to_date %></td><td><%= @checkbook.savings_overrun %></td</tr>"
+
+$("#checkbooks tbody").append(rowTemplate);

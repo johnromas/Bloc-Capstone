@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428205258) do
+ActiveRecord::Schema.define(version: 20140501021543) do
+
+  create_table "checkbooks", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "budget"
+    t.decimal  "cost_to_date"
+    t.decimal  "savings_overrun"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "job_id"
+  end
 
   create_table "companies", force: true do |t|
     t.string   "name"

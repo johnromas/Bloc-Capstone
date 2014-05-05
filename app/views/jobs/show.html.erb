@@ -59,6 +59,9 @@
                       <li>
                         <a href="#s3" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Job Staff</a>
                       </li>
+                      <li>
+                        <a href="#s4" data-toggle="tab"></i> Checkbooks</a>
+                      </li>
                     </ul>
         
                     <div id="myTabContent1" class="tab-content padding-10">
@@ -109,7 +112,7 @@
                           <% end %>
                         </tbody>
                         </table>
-                         <%= form_for StaffAssignment.new do |f| %>
+                         <%= form_for StaffAssignment.new, remote: true, authenticity_token: true do |f| %>
                             <%= f.collection_select :project_role_id, ProjectRole.all, :id, :name %>
                             <%= f.collection_select :user_id, User.all, :id, :name %>
                             <%= f.hidden_field :job_id, value: @job.id %>
@@ -118,6 +121,63 @@
                   
                     
                       </div>
+
+                      <div class="tab-pane fade" id="s4">
+                        <table id='checkbooks' class='table table-bordered table-striped'>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Budget</th>
+                            <th>Cost to Date</th>
+                            <th>Savings/Overrun</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @checkbooks.each do |checkbook| %> 
+                          <tr>
+                            <td><%= checkbook.name %></td>
+                            <td><%= checkbook.description %></td>
+                            <td><%= checkbook.budget %></td>
+                            <td><%= checkbook.cost_to_date %></td>
+                            <td><%= checkbook.savings_overrun %></td>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                        </table>
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                      Add Checkbook
+                    </button>
+                      </div>
+
+                        <div class="tab-pane fade" id="s5">
+                        <table id='checkbooks' class='table table-bordered table-striped'>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Budget</th>
+                            <th>Cost to Date</th>
+                            <th>Savings/Overrun</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @checkbooks.each do |checkbook| %> 
+                          <tr>
+                            <td><%= checkbook.name %></td>
+                            <td><%= checkbook.description %></td>
+                            <td><%= checkbook.budget %></td>
+                            <td><%= checkbook.cost_to_date %></td>
+                            <td><%= checkbook.savings_overrun %></td>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                        </table>
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                      Add Checkbook
+                    </button>
+                      </div>
+
                     </div>
                 
                   </div>
@@ -136,39 +196,31 @@
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                       </button>
-                      <h4 class="modal-title" id="myModalLabel">Add Contact</h4>
+                      <h4 class="modal-title" id="myModalLabel">Add Checkbook</h4>
                     </div>
+                    <%= form_for @checkbook, remote: true, authenticity_token: true do |f| %>
                     <div class="modal-body">
                       <div class="row">
                         <div class="col-md-12">
-                          <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Title" required />
-                          </div>
-                          <div class="form-group">
-                            <textarea class="form-control" placeholder="Content" rows="5" required></textarea>
-                          </div>
+                          <%= f.label :name %>
+                          <%= f.text_field :name, class: 'form-control' %>
+                          <%= f.label :description %>
+                          <%= f.text_area :description, class: 'form-control' %>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-12">
                           <div class="well well-sm well-primary">
-                            <form class="form form-inline " role="form">
                               <div class="form-group">
-                                <input type="text" class="form-control" value="" placeholder="Date" required />
+                                <%= f.label :budget %>
+                                <%= f.text_field :budget, class: 'form-control' %>
                               </div>
+                          
                               <div class="form-group">
-                                <select class="form-control">
-                                  <option>Draft</option>
-                                  <option>Published</option>
-                                </select>
-                              </div>
-                              <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-sm">
-                                  <span class="glyphicon glyphicon-floppy-disk"></span> Save
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm">
-                                  <span class="glyphicon glyphicon-eye-open"></span> Preview
-                                </button>
+                            
+                                <%= f.hidden_field :job_id, value: @job.id %>
+                                <%= f.submit "Submit", class: 'btn btn-primary' %>
+                                <% end %>
                               </div>
                             </form>
                           </div>

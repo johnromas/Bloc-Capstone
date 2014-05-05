@@ -16,6 +16,8 @@ class Job < ActiveRecord::Base
   has_many :companies, through: :job_assignments
   has_many :contacts, through: :job_assignments
 
+  has_many :checkbooks
+
   validates :name, presence: true
 
   before_save :assign_job_number, on: [ :create, :update ]
