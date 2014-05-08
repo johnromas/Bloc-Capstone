@@ -9,239 +9,229 @@
 </div>
 
 <div class="row">
-      
-      
-            <!-- NEW WIDGET START -->
-            <article class="col-sm-12 col-md-12 col-lg-6">
-        
-              <!-- Widget ID (each widget will need unique ID)-->
-              <div class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
-                <!-- widget options:
-                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-        
-                data-widget-colorbutton="false"
-                data-widget-editbutton="false"
-                data-widget-togglebutton="false"
-                data-widget-deletebutton="false"
-                data-widget-fullscreenbutton="false"
-                data-widget-custombutton="false"
-                data-widget-collapsed="true"
-                data-widget-sortable="false"
-        
-                -->
-                <header>
-                  <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                  <h2>Default Tabs with border </h2>
-        
-                </header>
-        
-                <!-- widget div-->
-                <div>
-        
-                  <!-- widget edit box -->
-                  <div class="jarviswidget-editbox">
-                    <!-- This area used as dropdown edit box -->
-        
-                  </div>
-                  <!-- end widget edit box -->
-        
-                  <!-- widget content -->
-                  <div class="widget-body">
-      
-                    <hr class="simple">
-                    <ul id="myTab1" class="nav nav-tabs bordered">
-                      <li class="active">
-                        <a href="#s1" data-toggle="tab">Job Data</a>
-                      </li>
-                      <li>
-                        <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Job Contacts</a>
-                      </li>
-                      <li>
-                        <a href="#s3" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Job Staff</a>
-                      </li>
-                      <li>
-                        <a href="#s4" data-toggle="tab"></i> Checkbooks</a>
-                      </li>
-                    </ul>
-        
-                    <div id="myTabContent1" class="tab-content padding-10">
-                      <div class="tab-pane fade in active" id="s1">
-                        <b>Building:</b> <%= @job.building %>
-                      </div>
-                      <div class="tab-pane fade" id="s2">
-                        <table id='job-contacts' class='table table-bordered table-striped'>
-                          <thead>
-                          <tr>
-                            <th>Type</th>
-                            <th>Company</th>
-                            <th>Address</th>
-                            <th>Contact</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% @companies.each do |company| %> 
-                          <tr>
-                            <td><%= company.company_type.name rescue "this is bad form" %></td>
-                            <td><%= link_to company.name, company rescue "this is bad form" %></td>
-                            <td><%= company.address %></td>
-                            <td>Test</td>
-                          </tr>
-                          <% end %>
-                        </tbody>
-                        </table>
-                        <%= form_for JobAssignment.new do |f| %>
-                          <%= f.collection_select :company_id, Company.all, :id, :name %>
-                          <%= f.hidden_field :job_id, value: @job.id %>
-                          <%= f.submit %>
-                        <% end %>
-                      </div>
-                      <div class="tab-pane fade" id="s3">
-                        <table id='staff-contacts' class='table table-bordered table-striped'>
-                          <thead>
-                          <tr>
-                            <th>Project Role</th>
-                            <th>Name</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% @staff_assignments.each do |assignment| %> 
-                          <tr>
-                            <td><%= assignment.project_role.name %></td>
-                            <td><%= assignment.user.name rescue "bad"%></td>
-                          </tr>
-                          <% end %>
-                        </tbody>
-                        </table>
-                         <%= form_for StaffAssignment.new, remote: true, authenticity_token: true do |f| %>
-                            <%= f.collection_select :project_role_id, ProjectRole.all, :id, :name %>
-                            <%= f.collection_select :user_id, User.all, :id, :name %>
-                            <%= f.hidden_field :job_id, value: @job.id %>
-                            <%= f.submit %>
-                          <% end %>
-                  
-                    
-                      </div>
 
-                      <div class="tab-pane fade" id="s4">
-                        <table id='checkbooks' class='table table-bordered table-striped'>
-                          <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Budget</th>
-                            <th>Cost to Date</th>
-                            <th>Savings/Overrun</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% @checkbooks.each do |checkbook| %> 
-                          <tr>
-                            <td><%= checkbook.name %></td>
-                            <td><%= checkbook.description %></td>
-                            <td><%= checkbook.budget %></td>
-                            <td><%= checkbook.cost_to_date %></td>
-                            <td><%= checkbook.savings_overrun %></td>
-                          </tr>
-                          <% end %>
-                        </tbody>
-                        </table>
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                      Add Checkbook
-                    </button>
-                      </div>
+  <article class="col-sm-12 col-md-12 col-lg-6">
 
-                        <div class="tab-pane fade" id="s5">
-                        <table id='checkbooks' class='table table-bordered table-striped'>
-                          <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Budget</th>
-                            <th>Cost to Date</th>
-                            <th>Savings/Overrun</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% @checkbooks.each do |checkbook| %> 
-                          <tr>
-                            <td><%= checkbook.name %></td>
-                            <td><%= checkbook.description %></td>
-                            <td><%= checkbook.budget %></td>
-                            <td><%= checkbook.cost_to_date %></td>
-                            <td><%= checkbook.savings_overrun %></td>
-                          </tr>
-                          <% end %>
-                        </tbody>
-                        </table>
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                      Add Checkbook
-                    </button>
-                      </div>
+    <div class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
 
+      <header>
+        <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+        <h2>Default Tabs with border </h2>
+
+      </header>
+
+      <div>
+
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+          <!-- This area used as dropdown edit box -->
+
+        </div>
+        <!-- end widget edit box -->
+
+        <!-- widget content -->
+        <div class="widget-body">
+
+          <hr class="simple">
+          <ul id="myTab1" class="nav nav-tabs bordered">
+            <li class="active">
+              <a href="#s1" data-toggle="tab">Job Data</a>
+            </li>
+            <li>
+              <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Job Contacts</a>
+            </li>
+            <li>
+              <a href="#s3" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Job Staff</a>
+            </li>
+            <li>
+              <a href="#s4" data-toggle="tab"></i> Checkbooks</a>
+            </li>
+          </ul>
+
+          <div id="myTabContent1" class="tab-content padding-10">
+            <div class="tab-pane fade in active" id="s1">
+              <b>Building:</b> <%= @job.building %>
+            </div>
+            <div class="tab-pane fade" id="s2">
+              <table id='job-contacts' class='table table-bordered table-striped'>
+                <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Company</th>
+                  <th>Address</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @companies.each do |company| %> 
+                <tr>
+                  <td><%= company.company_type.name rescue "this is bad form" %></td>
+                  <td><%= link_to company.name, company rescue "this is bad form" %></td>
+                  <td><%= company.address %></td>
+                  <td>Test</td>
+                </tr>
+                <% end %>
+              </tbody>
+              </table>
+              <%= form_for [@job, @job_assignment] do |f| %>
+                <%= f.collection_select :company_id, Company.all, :id, :name %>
+                <%= f.hidden_field :job_id, value: @job.id %>
+                <%= f.submit %>
+              <% end %>
+            </div>
+            <div class="tab-pane fade" id="s3">
+              <table id='staff-contacts' class='table table-bordered table-striped'>
+                <thead>
+                <tr>
+                  <th>Project Role</th>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @staff_assignments.each do |assignment| %> 
+                <tr id='staff_assignment_<%=assignment.id %>'>
+                  <td><%= assignment.project_role.name %></td>
+                  <td><%= assignment.user.name rescue "bad"%></td>
+                  <td><%= link_to 'Destroy', job_staff_assignment_path(assignment.job, assignment), :method => :delete, :class => 'btn btn-mini btn-danger', remote: true %></td>
+                </tr>
+                <% end %>
+              </tbody>
+              </table>
+               <%= form_for [@job, @new_staff_assignment], remote: true, authenticity_token: true do |f| %>
+                  <%= f.collection_select :project_role_id, ProjectRole.order(:name), :id, :name, include_blank: true %>
+                  <%= f.grouped_collection_select :user_id, ProjectRole.order(:name), :users, :name, :id, :f_name, include_blank: true %>
+                  <%= f.hidden_field :job_id, value: @job.id %>
+                  <%= f.submit %>
+                <% end %>
+        
+          
+            </div>
+
+            <div class="tab-pane fade" id="s4">
+              <table id='checkbooks' class='table table-bordered table-striped'>
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Budget</th>
+                  <th>Cost to Date</th>
+                  <th>Savings/Overrun</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @checkbooks.each do |checkbook| %> 
+                <tr>
+                  <td><%= checkbook.name %></td>
+                  <td><%= checkbook.description %></td>
+                  <td><%= checkbook.budget %></td>
+                  <td><%= checkbook.cost_to_date %></td>
+                  <td><%= checkbook.savings_overrun %></td>
+                </tr>
+                <% end %>
+              </tbody>
+              </table>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Add Checkbook
+          </button>
+            </div>
+
+              <div class="tab-pane fade" id="s5">
+              <table id='checkbooks' class='table table-bordered table-striped'>
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Budget</th>
+                  <th>Cost to Date</th>
+                  <th>Savings/Overrun</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @checkbooks.each do |checkbook| %> 
+                <tr>
+                  <td><%= checkbook.name %></td>
+                  <td><%= checkbook.description %></td>
+                  <td><%= checkbook.budget %></td>
+                  <td><%= checkbook.cost_to_date %></td>
+                  <td><%= checkbook.savings_overrun %></td>
+                </tr>
+                <% end %>
+              </tbody>
+              </table>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Add Checkbook
+          </button>
+            </div>
+
+          </div>
+      
+        </div>
+        <!-- end widget content -->
+
+      </div>
+      <!-- end widget div -->
+
+    </div>
+    <!-- end widget -->
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Add Checkbook</h4>
+          </div>
+          <%= form_for [@job, @checkbook], remote: true, authenticity_token: true do |f| %>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: 'form-control' %>
+                <%= f.label :description %>
+                <%= f.text_area :description, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="well well-sm well-primary">
+                    <div class="form-group">
+                      <%= f.label :budget %>
+                      <%= f.text_field :budget, class: 'form-control' %>
                     </div>
                 
-                  </div>
-                  <!-- end widget content -->
-        
+                    <div class="form-group">
+                  
+                      <%= f.hidden_field :job_id, value: @job.id %>
+                      <%= f.submit "Submit", class: 'btn btn-primary' %>
+                      <% end %>
+                    </div>
+                  </form>
                 </div>
-                <!-- end widget div -->
-        
               </div>
-              <!-- end widget -->
-
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">Add Checkbook</h4>
-                    </div>
-                    <%= form_for @checkbook, remote: true, authenticity_token: true do |f| %>
-                    <div class="modal-body">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <%= f.label :name %>
-                          <%= f.text_field :name, class: 'form-control' %>
-                          <%= f.label :description %>
-                          <%= f.text_area :description, class: 'form-control' %>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="well well-sm well-primary">
-                              <div class="form-group">
-                                <%= f.label :budget %>
-                                <%= f.text_field :budget, class: 'form-control' %>
-                              </div>
-                          
-                              <div class="form-group">
-                            
-                                <%= f.hidden_field :job_id, value: @job.id %>
-                                <%= f.submit "Submit", class: 'btn btn-primary' %>
-                                <% end %>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-              
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Cancel
-                      </button>
-                      <button id="add-contact-button" type="button" class="btn btn-primary">
-                        Add Contact
-                      </button>
-                    </div>
-                  </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-              </div><!-- /.modal -->
+            </div>
+    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Cancel
+            </button>
+            <button id="add-contact-button" type="button" class="btn btn-primary">
+              Add Contact
+            </button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
         
         
 
 
 <%= link_to "Edit Job", edit_job_path, class: "btn btn-primary" %>
+<%= form_for @job, :html => { :class => "button_to" } do |f| %>
+  <%= f.hidden_field :update_type, :value => :assign_job_number %> <!--Made up -->
+  <%= f.submit "Submit", :class => "link" %>
+<% end %>
 

@@ -1,8 +1,20 @@
-<address>
-  <strong><%= @company.name %></strong><br>
-  <%= @company.address %><br>
-  <%= @company.city %>, <%= @company.state.abbreviation %> <%= @company.zip %><br>
-</address>
+<table class='table table-bordered'>
+  <tr>
+    <td><b>Company Name</b></td>
+    <td><%= best_in_place @company, :name %></td>
+    <td><b>Address</b></td>
+    <td><%= best_in_place @company, :address %></td>
+  </tr>
+  <tr>
+    <td><b>City</b></td>
+    <td><%= best_in_place @company, :city, :nil => "Click me to add content!" %></td>
+    <td><b>State</b></td>
+  </tr>
+</table>
+
+
+
+
 
 <%= link_to "New Contact", new_company_contact_path(@company), class: "btn btn-primary" %>
 <%= link_to "Edit Company", edit_company_path, class: "btn btn-success" %>

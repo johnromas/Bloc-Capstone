@@ -1,3 +1,3 @@
-var rowTemplate = "<tr><td><%= @staff_assignment.project_role.name %></td><td><%= @staff_assignment.user.name %></td></tr>"
+var rowTemplate = "<tr id='staff_assignment_<%= @staff_assignment.id %>'><td><%= @staff_assignment.project_role.name %></td><td><%= @staff_assignment.user.name %></td><td><a class='btn btn-mini btn-danger' data-method='delete' data-remote='true' href='/jobs/<%=@staff_assignment.job.id %>/staff_assignments/<%=@staff_assignment.id%>' rel='nofollow'>Destroy</a></td></tr>"
 
 $("#staff-contacts tbody").append(rowTemplate)

@@ -23,7 +23,11 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'devise'
 
+gem 'best_in_place', :git => 'https://github.com/aaronchi/best_in_place.git'
+
 gem 'thin'
+
+gem 'faker'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

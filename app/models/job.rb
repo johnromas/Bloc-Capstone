@@ -25,6 +25,14 @@ class Job < ActiveRecord::Base
   before_save :assign_precon_number, on: :create
 
 
+  def superintendents
+    array = []
+    self.staff_assignments.each do |staff|
+      array << staff.user.name if staff.project_role.name == "Superintendent"
+    end
+    array
+  end
+
   protected
 
 
@@ -48,6 +56,8 @@ class Job < ActiveRecord::Base
   end
 
   def assign_job_number
+
+
     #Does the job not have a job # but have a Contract Type?
     if !self.number? && self.contract_type_id?
         #Create an empty array

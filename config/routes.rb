@@ -6,12 +6,13 @@ GAL::Application.routes.draw do
   get "contract_types/index"
   resources :sachse_groups
   get "welcome/index"
-  resources :jobs
+  resources :jobs do
+    resources :checkbooks
+    resources :job_assignments
+    resources :staff_assignments
+  end
   resources :psr
   resources :contract_types
-  resources :job_assignments
-  resources :checkbooks
-  resources :staff_assignments
   resources :states
   resources :project_types
   resources :project_phases

@@ -4,9 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :role_assignments
+  has_many :project_roles, through: :role_assignments
+
 
 
   def name
-    self.f_name + " " + self.l_name
+    if self.l_name
+      self.f_name + " " + self.l_name
+    else
+      self.f_name
+    end
   end
 end

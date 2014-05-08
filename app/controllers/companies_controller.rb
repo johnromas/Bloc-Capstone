@@ -21,6 +21,7 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     @contact = Contact.new
+    @state = State.all
   end
 
  def create

@@ -16,6 +16,8 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @companies = @job.companies
     @staff_assignments = @job.staff_assignments
+    @new_staff_assignment = StaffAssignment.new
+    @job_assignment = JobAssignment.new
     @checkbook = Checkbook.new
     @checkbooks = @job.checkbooks
   end
@@ -39,8 +41,8 @@ class JobsController < ApplicationController
     end
   end
 
-
   def destroy
+
     @job = Job.find(params[:id])
     @job.destroy
 
@@ -53,14 +55,23 @@ class JobsController < ApplicationController
 
   def update
    @job = Job.find(params[:id])
+
+
+    #"jobs#update"
     #binding.pry
-    respond_to do |format|
-      if @job.update_attributes(job_params)
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @job.errors, root: true,status: :unprocessable_entity }
+    case params[:job][:update_type]
+    when :assign_job_number
+      @job.assign_job_number!
+    else
+      # behavor normally
+      respond_to do |format|
+        if @job.update_attributes(job_params)
+          format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @job.errors, root: true,status: :unprocessable_entity }
+        end
       end
     end
   end
