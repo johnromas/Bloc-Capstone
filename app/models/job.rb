@@ -18,6 +18,8 @@ class Job < ActiveRecord::Base
 
   has_many :checkbooks
 
+  has_many :dailys
+
   validates :name, presence: true
 
   before_save :assign_job_number, on: [ :create, :update ]

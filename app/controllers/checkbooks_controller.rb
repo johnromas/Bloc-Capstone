@@ -1,7 +1,11 @@
 class CheckbooksController < ApplicationController
+  # before_action :set_nav_list_items
+  include NavHelper
   def index
-    @job = Job.find(params[:id])
+    @job = Job.find(params[:job_id])
     @checkbooks = @job.checkbooks
+    # @nav_list_items = [[job_checkbooks_path(@job), 'Checkbooks'], [job_dailys_path(@job), "Daily Logs"]]
+    @nav_list_items = job_nav_list_items
   end
 
   def new
@@ -51,9 +55,13 @@ class CheckbooksController < ApplicationController
 
     end
   end
+
+  # def set_nav_list_items
+  # end
+
   private
 
   def checkbook_params
-      params.require(:checkbook).permit(:name, :description, :budget, :cost_to_date, :savings_overrun, :job_id)
-    end
+    params.require(:checkbook).permit(:name, :description, :budget, :cost_to_date, :savings_overrun, :job_id)
+  end
 end

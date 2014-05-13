@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  include NavHelper
   def index
     @jobs = Job.all
 
@@ -20,6 +21,8 @@ class JobsController < ApplicationController
     @job_assignment = JobAssignment.new
     @checkbook = Checkbook.new
     @checkbooks = @job.checkbooks
+    # binding.pry
+    @nav_list_items = job_nav_list_items
   end
 
   def edit
@@ -75,6 +78,7 @@ class JobsController < ApplicationController
       end
     end
   end
+
 
 
   private

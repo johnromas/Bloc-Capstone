@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :role_assignments
   has_many :project_roles, through: :role_assignments
+  has_many :dailys
 
 
 

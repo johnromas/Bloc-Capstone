@@ -1,0 +1,39 @@
+<div class="well">
+  <h4>Notes Log</h4>
+    <table id='daily-notes' class='table table-bordered table-striped'>
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>AM Temp.</th>
+        <th>PM Temp</th>
+        <th>Weather Description</th>
+        <th>Notes</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @dailys.each do |daily| %> 
+      <tr>
+        <td><%= daily.date %></td>
+        <td><%= daily.am_temp %></td>
+        <td><%= daily.pm_temp %></td>
+        <td><%= daily.weather_desc %></td>
+        <td><%= daily.notes %></td>
+        <td></td>
+      </tr>
+      <% end %>
+      <%= form_for [@job, @daily], url: job_dailys_path, remote: true, authenticity_token: true do |f| %>
+      <tr>
+        <td><%= f.date_field :date, class: 'form-control', placeholder: 'Date', value: Date.today %></td>
+        <td><%= f.text_field :am_temp, class: 'form-control', placeholder: 'AM Temp' %></td>
+        <td><%= f.text_field :pm_temp, class: 'form-control', placeholder: 'PM Temp'%></td>
+        <td><%= f.text_field :weather_desc, class: 'form-control', placeholder: 'Weather Description'%></td>
+        <td><%= f.text_area :notes, class: 'form-control', placeholder: 'Notes'%></td>
+        <td><%= f.submit "Add" %>
+      </tr>
+        <% end %>
+    </tbody>
+    </table>
+
+  </div>
+</div>

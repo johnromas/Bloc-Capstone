@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507221853) do
+ActiveRecord::Schema.define(version: 20140508162216) do
 
   create_table "checkbooks", force: true do |t|
     t.string   "name"
@@ -93,6 +93,21 @@ ActiveRecord::Schema.define(version: 20140507221853) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "dailies", force: true do |t|
+    t.integer  "job_id"
+    t.date     "date"
+    t.integer  "user_id"
+    t.integer  "am_temp"
+    t.integer  "pm_temp"
+    t.string   "weather_desc"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dailies", ["job_id"], name: "index_dailies_on_job_id"
+  add_index "dailies", ["user_id"], name: "index_dailies_on_user_id"
 
   create_table "employments", force: true do |t|
     t.integer  "company_id"

@@ -23,6 +23,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'devise'
 
+gem "font-awesome-rails"
+
 gem 'best_in_place', :git => 'https://github.com/aaronchi/best_in_place.git'
 
 gem 'thin'

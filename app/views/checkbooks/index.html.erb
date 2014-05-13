@@ -2,3 +2,5 @@
 <%= @checkbooks.each do |checkbook| %>
   <p><%=checkbook.name %></p>
   <% end %>
+
+  <%= link_to job_checkbooks_path(@job)
