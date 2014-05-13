@@ -13,23 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require best_in_place
-//= require smartadmin/pace.min.js
-//= require smartadmin/bootstrap.min.js
-//= require smartadmin/SmartNotification.min.js
-//= require smartadmin/jarvis.widget.min.js
-//= require smartadmin/jquery.easy-pie-chart.min.js
-//= require smartadmin/jquery.sparkline.min.js
-//= require smartadmin/jquery.validate.min.js
-//= require smartadmin/jquery.maskedinput.min.js
-//= require smartadmin/select2.min.js
-//= require smartadmin/bootstrap-slider.min.js
-//= require smartadmin/jquery.mb.browser.min.js
-//= require smartadmin/fastclick.js
-//= require smartadmin/demo.js
-//= require smartadmin/app.js
 //= require jobs2.js.coffee
 //= require kendo/kendo.web.min.js
 //= require kendo/grids.js
 //= require psr.js
 //= require companies.js.coffee
+//= require_tree .
 

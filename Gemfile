@@ -10,6 +10,7 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'rails-dev-tweaks', '~> 1.1'
 end
 
 # Use SCSS for stylesheets

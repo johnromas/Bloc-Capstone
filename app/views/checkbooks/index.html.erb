@@ -1,6 +1,4 @@
 <h1>Checkbooks</h1>
-<%= @checkbooks.each do |checkbook| %>
-  <p><%=checkbook.name %></p>
+<% @checkbooks.each do |checkbook| %>
+  <p><%= link_to checkbook.name, [@job, checkbook] %></p>
   <% end %>
-
-  <%= link_to job_checkbooks_path(@job)
