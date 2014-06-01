@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    jobs_path
+    psr_index_path
   end
 
   def set_recent_jobs
