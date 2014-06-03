@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508162216) do
+ActiveRecord::Schema.define(version: 20140601195758) do
 
   create_table "checkbooks", force: true do |t|
     t.string   "name"
@@ -109,6 +109,46 @@ ActiveRecord::Schema.define(version: 20140508162216) do
   add_index "dailies", ["job_id"], name: "index_dailies_on_job_id"
   add_index "dailies", ["user_id"], name: "index_dailies_on_user_id"
 
+  create_table "daily_equipments", force: true do |t|
+    t.integer  "number"
+    t.string   "name"
+    t.decimal  "operating_hours"
+    t.decimal  "idel_hours"
+    t.string   "cost_code"
+    t.string   "location"
+    t.boolean  "inspected"
+    t.time     "inspection_time"
+    t.text     "notes"
+    t.integer  "daily_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "daily_manpowers", force: true do |t|
+    t.integer  "number"
+    t.integer  "workers"
+    t.decimal  "hours"
+    t.decimal  "man_hours"
+    t.string   "cost_code"
+    t.string   "location"
+    t.text     "notes"
+    t.integer  "daily_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "daily_manpowers", ["daily_id"], name: "index_daily_manpowers_on_daily_id"
+
+  create_table "daily_notes", force: true do |t|
+    t.integer  "number"
+    t.boolean  "issue"
+    t.string   "location"
+    t.text     "comment"
+    t.integer  "daily_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "employments", force: true do |t|
     t.integer  "company_id"
     t.integer  "contact_id"
@@ -125,6 +165,7 @@ ActiveRecord::Schema.define(version: 20140508162216) do
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "daily_manpower_id"
   end
 
   create_table "jobs", force: true do |t|

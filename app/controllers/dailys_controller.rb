@@ -1,10 +1,15 @@
 class DailysController < ApplicationController
   include NavHelper
   def index
+    # binding.pry
     @job = Job.find(params[:job_id])
     @dailys = @job.dailys
     @daily = Daily.new
     @nav_list_items = job_nav_list_items
+    respond_to do |format|
+      format.html
+      format.json { render json: @dailys, root: false }
+    end
   end
 
   def new
@@ -19,7 +24,12 @@ class DailysController < ApplicationController
 
   def show
     @job = Job.find(params[:job_id])
-    @daily = @job.daily.find(params[:id])
+    @daily = @job.dailys.find(params[:id])
+    @daily_note = DailyNote.new
+    @daily_notes = @daily.daily_notes
+    @dailys = @job.dailys
+
+    
 
   end
 

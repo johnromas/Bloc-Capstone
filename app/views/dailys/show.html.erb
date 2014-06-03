@@ -1,0 +1,55 @@
+<div class="well">
+  <h3>Notes Log</h3>
+  <h5>Select Date</h5>
+  <div id="example">
+    <input id="datepicker">
+  </div>
+  <%= form_for [@job, @daily, @daily_note], remote: true, authenticity_token: true do |f| %>
+  <%= f.collection_select :daily_id, @job.dailys.order(:date), :id, :date, include_blank: true %>
+  <% end %>
+
+
+  <!-- possibly add url as a data attribute to each option -->
+  <!-- on click, use the AJAX load method to replace the contents of the page -->
+    <table id='daily-notes' class='table table-bordered table-striped'>
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Issue?</th>
+          <th>Location</th>
+          <th>Comment</th>
+          <th>Attachments</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @daily_notes.each do |daily| %> 
+          <tr>
+            <td></td>
+            <td><%= check_box_tag :issue %></td>
+            <td><%= daily.location %></td>
+            <td><%= daily.comment %></td>
+            <td></td>
+          </tr>
+      <% end %>
+      <%= form_for [@job, @daily, @daily_note], remote: true, authenticity_token: true do |f| %>
+      <tr class: 'new-log'>
+        <td></td>
+        <td><%= f.check_box :issue, class: 'form-control input-xs' %></td>
+        <td><%= f.text_field :location, class: 'form-control', placeholder: 'Enter location'%></td>
+        <td><%= f.text_area :comment, class: 'form-control', placeholder: 'Notes'%></td>
+        <%= f.hidden_field :daily_id, value: @daily.id %>
+
+        <td><%= f.submit "Add" %>
+      </tr>
+        <% end %>
+    </tbody>
+    </table>
+
+  </div>
+</div>
+
+<%= javascript_tag do %>
+<!--   window.jobs = <%=raw @jobs %>; -->
+  window.job = "<%=raw @job.id %>";
+<% end %>

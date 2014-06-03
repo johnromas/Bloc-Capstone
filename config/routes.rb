@@ -5,7 +5,9 @@ GAL::Application.routes.draw do
     resources :checkbooks
     resources :job_assignments
     resources :staff_assignments
-    resources :dailys
+    resources :dailys do
+      resources :daily_notes
+    end
   end
   resources :psr
   resources :contract_types

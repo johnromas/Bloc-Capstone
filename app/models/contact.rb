@@ -8,4 +8,5 @@ class Contact < ActiveRecord::Base
 
   has_many :job_assignments
   has_many :jobs, through: :job_assignments
+  has_many :daily_manpowers, through: :job_assignments
 end
